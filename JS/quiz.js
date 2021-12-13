@@ -5,11 +5,11 @@ const quizLayout = () => {
     const containerQuiz = document.createElement("div");
     containerQuiz.classList.add("container-quiz");
 
-    //column
+    //title
     const genreTitle = document.createElement("div");
     genreTitle.classList.add("quiz-title");
     genreTitle.innerHTML = "Math Problem";
-    //genre.name instead of  quiz-genre
+    
 
     //quest counter
     const questionCounter = document.createElement("div")
