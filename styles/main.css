@@ -70,30 +70,30 @@ body {
   counter-reset: li;
 }
 
-.solution-Option {
+.question-bar {
   display: flex;
   position: relative;
   background-color: white;
-  width: 90%;
+  width: 100%;
   border-radius: 2px;
   margin: 10px auto;
-  text-align: left;
   padding: 5px 20px;
 }
-.solution-Option:nth-child(odd)::before {
+.question-bar:nth-child(odd)::before {
   counter-increment: li;
   content: "" counter(li);
-  position: relative;
-  left: -5vw;
+  position: absolute;
+  left: 0;
   outline: 15px solid teal;
   background-color: white;
   border-radius: 50%;
   padding: 5px 20px;
 }
-.solution-Option:nth-child(even)::after {
+.question-bar:nth-child(even)::after {
+  counter-increment: li;
   content: "" counter(li);
   position: absolute;
-  right: -1vw;
+  right: 0;
   outline: 15px solid teal;
   background-color: white;
   border-radius: 50%;

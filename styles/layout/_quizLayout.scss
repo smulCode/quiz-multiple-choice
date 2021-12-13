@@ -1,100 +1,74 @@
 .container-quiz {
-  display:grid;
+  display: grid;
   margin: 1em 5vw;
   height: max-content;
   background-color: teal;
   border: 100%;
   padding: 1em;
-  
 }
 .quiz-title {
   height: max-content;
   width: 100%;
   // border: 1px solid magenta;
   // background-color: orange;
-  font-size:3em;
+  font-size: 3em;
   font-weight: bolder;
-
-
 }
 
-.question{
-    background-color:white;
-    padding: 1em;
-    border-radius: 10px;
-    width: 90%;
-    margin: 0 auto;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-
+.question {
+  background-color: white;
+  padding: 1em;
+  border-radius: 10px;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
-.question-counter{
+.question-counter {
   font-size: 2rem;
   font-weight: bold;
 }
 
-.solutions{
+.solutions {
   list-style: none;
-  display:grid;
+  display: grid;
   font-size: 2em;
-  counter-reset:li;
 
-
+  counter-reset: li;
 }
 
-.solution-Option{
-  display:flex;
+.question-bar {
+  display: flex;
   position: relative;
   background-color: white;
-  width: 90%;
+  width: 100%;
   border-radius: 2px;
   margin: 10px auto;
-  text-align:left;
   padding: 5px 20px;
-  
- 
 
   // border: 1px solid red;
 
- &:nth-child(odd)::before{
-  counter-increment: li ;                
-  content: "" counter(li);
-   position: relative;
-   left: -5vw;
-   outline: 15px solid teal;
-   background-color: white;
-   border-radius: 50%;
-   padding: 5px 20px;
-  //  background-color:white;
-  //  clip-path: circle(50% at 50% 50%);
- }
- &:nth-child(even)::after{
-  content: "" counter(li);
-   position:absolute;
-   right: -1vw;
-   outline: 15px solid teal;
-   background-color: white;
-   border-radius: 50%;
-   padding: 5px 20px;
-  //  background-color:white;
-  //  clip-path: circle(50% at 50% 50%);
- }
+  &:nth-child(odd)::before {
+    counter-increment: li;
+    content: "" counter(li);
+    position: absolute;
+    left: 0;
+    outline: 15px solid teal;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px 20px;
+    //  background-color:white;
+    //  clip-path: circle(50% at 50% 50%);
+  }
+  &:nth-child(even)::after {
+    counter-increment: li;
+    content: "" counter(li);
+    position: absolute;
+    right: 0;
+    outline: 15px solid teal;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px 20px;
+  }
 }
-
-// .solution-number-left{
-//   position: absolute;
-//   background-color: white;
-//   border: 10px solid teal;
-//   border-radius: 50%;
-//   padding: 1em;
-//   z-index: 2;
-// }
-// .solution-number-right{
-//   position: absolute;
-//   background-color: white;
-//   border: 10px solid teal;
-//   border-radius: 50%;
-//   padding: 1rem;
-//   z-index: 2;
-// }
