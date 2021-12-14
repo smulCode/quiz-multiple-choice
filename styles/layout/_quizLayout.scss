@@ -23,7 +23,7 @@
   font-weight: bold;
   margin-bottom: 10px;
 }
-.question-counter {
+.question-count {
   font-size: 2rem;
   font-weight: bold;
 }
@@ -55,7 +55,7 @@
     position: absolute;
     left: 0;
     outline: 15px solid teal;
-    background-color: white;
+
     border-radius: 50%;
     width: 3rem;
     height: 3rem;
@@ -69,7 +69,6 @@
     position: absolute;
     right: 0;
     outline: 15px solid teal;
-    background-color: white;
     border-radius: 50%;
     width: 3rem;
     height: 3rem;

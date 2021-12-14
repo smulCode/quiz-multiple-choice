@@ -1,4 +1,3 @@
-
 const mathProblems = [
   {
     question: "what is 49 - 32",
@@ -38,9 +37,8 @@ const mathProblems = [
   },
 ];
 
-
-
-let counter = 1;
+let score = 0;
+let count = 1;
 
 const quiz = (mathProblem) => {
   //container quiz
@@ -48,15 +46,15 @@ const quiz = (mathProblem) => {
   containerQuiz.classList.add("container-quiz");
 
   //title
-  const genreTitle = document.createElement("div");
-  genreTitle.classList.add("quiz-title");
-  genreTitle.innerHTML = "Math Problem";
+  const quizTitle = document.createElement("div");
+  quizTitle.classList.add("quiz-title");
+  quizTitle.innerHTML = "Math Problem";
 
   //quest counter
 
-  const questionCounter = document.createElement("div");
-  questionCounter.classList.add("question-counter");
-  questionCounter.innerHTML = `${counter++}/${mathProblems.length}`;
+  const questionCount = document.createElement("div");
+  questionCount.classList.add("question-count");
+  questionCount.innerHTML = `${count++}/${mathProblems.length}`;
 
   //question
 
@@ -75,24 +73,23 @@ const quiz = (mathProblem) => {
     const questionBar = document.createElement("li");
     questionBar.classList.add("question-bar");
     questionBar.innerText = answer;
-    questionBar.addEventListener("click",selectQuestion)
+    questionBar.addEventListener("click", selectQuestion);
 
     if (answer === mathProblem.correct_answer) {
-      questionBar.setAttribute("data_answer","correct")
-    }
-    else{
-      questionBar.setAttribute("data_answer","incorrect")
+      questionBar.setAttribute("data-answer", "correct");
+      questionBar.setAttribute("Value", mathProblem.correct_answer);
+      questionBar.setAttribute("id", "correctAnswer");
+    } else {
+      questionBar.setAttribute("data-answer", "incorrect");
     }
 
     solutions.append(questionBar);
-
-
   });
 
   //add to container
   game.append(containerQuiz);
-  containerQuiz.appendChild(genreTitle);
-  containerQuiz.appendChild(questionCounter);
+  containerQuiz.appendChild(quizTitle);
+  containerQuiz.appendChild(questionCount);
   containerQuiz.appendChild(mathQuestion);
   containerQuiz.appendChild(solutions);
 
@@ -108,46 +105,35 @@ const quiz = (mathProblem) => {
   game.append(previousButton);
   game.append(nextButton);
 
-
   // const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
   // // console.log(allQuestions);
   // allQuestions.forEach((question) => questionBar.removeEventListener("click", questionChecker));
-
-
-
-
 };
 
 mathProblems.forEach((mathProblem) => quiz(mathProblem));
 
-
-
-
-
-
-function selectQuestion(){
- 
-  const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
-
+function selectQuestion() {
   const questionSelection = this;
-  // console.log(questionChoice);
-  console.log(questionSelection.getAttribute("data_answer"));
-  
-  if (questionSelection.getAttribute("data_answer") === "correct"){
-    questionSelection.classList.add("correct-answer")
-    console.log("green");
-  }
-  else if (questionSelection.getAttribute("data_answer")){
-    questionSelection.classList.add("incorrect-answer")
-    console.log('red');
-  }
-  else{
-  console.log('error');
-  
-  }
+  // const correctAnswer = document.getElementById("correctAnswer");
+  const correctAnswer = document.getElementById("correctAnswer").value;
+  console.log(correctAnswer);
 
+  if (questionSelection.dataset.answer === "correct") {
+    questionSelection.classList.add("correct-answer");
+  } else if (questionSelection.dataset.answer === "incorrect") {
+    questionSelection.classList.add("incorrect-answer");
+    correctAnswer.classList.add("correct-answer");
+  } else {
+    console.log("error");
+  }
 }
 
+// function highlight(){
+//  const correctAnswer = this.target.dataset.answer(correct)
+//  console.log(correctAnswer);
+// }
+
+// highlight();
 
 // function questionChecker() {
 //   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
@@ -160,3 +146,6 @@ function selectQuestion(){
 //   //   questionBar.classList.add("incorrect-answer")
 //   // }
 // }
+
+///if you click correct answer turn green
+///if you click wrong answer turn red and highlight the correct answer
