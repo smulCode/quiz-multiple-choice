@@ -9,8 +9,6 @@
 .quiz-title {
   height: max-content;
   width: 100%;
-  // border: 1px solid magenta;
-  // background-color: orange;
   font-size: 3em;
   font-weight: bolder;
 }
@@ -19,7 +17,7 @@
   background-color: white;
   padding: 1em;
   border-radius: 10px;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   font-size: 2rem;
   font-weight: bold;
@@ -34,7 +32,6 @@
   list-style: none;
   display: grid;
   font-size: 2em;
-
   counter-reset: li;
 }
 
@@ -47,10 +44,6 @@
   margin: 10px auto;
   padding: 5px 20px;
   
-
- 
-
-  // border: 1px solid red;
 
   &:nth-child(odd)::before {
     counter-increment: li;
@@ -79,7 +72,6 @@
   }
 }
 
-p{
-  padding-left: 1.5em;
- 
+li:nth-child(odd){
+  padding-left: 2em
 }

@@ -1,4 +1,4 @@
-import("./quiz.js")
+import("./module/quiz.js")
 const game = document.getElementById("game");
 
 
@@ -9,7 +9,7 @@ const ButtonQuiz = () => {
   console.log("yes");
   const startBtn = document.createElement("button");
   startBtn.classList.add("start-btn");
-  startBtn.innerText = "Start Quiz";
+  startBtn.innerText = "Start";
   game.append(startBtn);
 
 

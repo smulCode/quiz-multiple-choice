@@ -44,6 +44,20 @@ const quizLayout = () => {
   containerQuiz.appendChild(questionCounter);
   containerQuiz.appendChild(question);
   containerQuiz.appendChild(solutions);
+
+  //buttons
+  const previousButton = document.createElement("button");
+  previousButton.classList.add("previous-btn");
+  previousButton.innerHTML = "vorige";
+
+  const nextButton = document.createElement("button");
+  nextButton.classList.add("next-btn");
+  nextButton.innerHTML = "volgende";
+
+  game.append(previousButton);
+  game.append(nextButton);
 };
 
 quizLayout();
+
+
