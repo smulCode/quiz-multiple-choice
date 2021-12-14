@@ -74,12 +74,19 @@ const quiz = (mathProblem) => {
   mathProblem.all_answers.forEach((answer) => {
     const questionBar = document.createElement("li");
     questionBar.classList.add("question-bar");
-    // const questionText = document.createElement("p");
-    // questionText.classList.add("question-text");
     questionBar.innerText = answer;
+    questionBar.addEventListener("click",selectQuestion)
+
+    if (answer === mathProblem.correct_answer) {
+      questionBar.setAttribute("data_answer","correct")
+    }
+    else{
+      questionBar.setAttribute("data_answer","incorrect")
+    }
 
     solutions.append(questionBar);
-    // questionBar.append(questionText);
+
+
   });
 
   //add to container
@@ -102,8 +109,54 @@ const quiz = (mathProblem) => {
   game.append(nextButton);
 
 
-};
+  // const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
+  // // console.log(allQuestions);
+  // allQuestions.forEach((question) => questionBar.removeEventListener("click", questionChecker));
 
+
+
+
+};
 
 mathProblems.forEach((mathProblem) => quiz(mathProblem));
 
+
+
+
+
+
+function selectQuestion(){
+ 
+  const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
+
+  const questionSelection = this;
+  // console.log(questionChoice);
+  console.log(questionSelection.getAttribute("data_answer"));
+  
+  if (questionSelection.getAttribute("data_answer") === "correct"){
+    questionSelection.classList.add("correct-answer")
+    console.log("green");
+  }
+  else if (questionSelection.getAttribute("data_answer")){
+    questionSelection.classList.add("incorrect-answer")
+    console.log('red');
+  }
+  else{
+  console.log('error');
+  
+  }
+
+}
+
+
+// function questionChecker() {
+//   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
+//   console.log(allQuestions);
+//   // allQuestions.forEach((question) => questionBar.removeEventListener("click", questionChecker));
+//   // if (questionBar.getAttribute === ("correct_answer")) {
+//   //   questionBar.classList.add("correct-answer")
+//   // }
+//   // else{
+//   //   questionBar.classList.add("incorrect-answer")
+//   // }
+// }

@@ -122,4 +122,12 @@ button:hover {
 
 li:nth-child(odd) {
   padding-left: 2em;
+}
+
+.correct-answer {
+  background-color: greenyellow;
+}
+
+.incorrect-answer {
+  background-color: crimson;
 }/*# sourceMappingURL=main.css.map */
