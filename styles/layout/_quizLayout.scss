@@ -43,6 +43,10 @@
   border-radius: 2px;
   margin: 10px auto;
   padding: 5px 20px;
+
+  &:hover{
+    cursor: pointer;
+  }
   
 
   &:nth-child(odd)::before {

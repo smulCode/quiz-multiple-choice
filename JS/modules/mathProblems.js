@@ -1,6 +1,7 @@
 
 const mathProblems = [
   {
+    
     question: "what is 49 - 32",
     correct_answer: 17,
     incorrect_answer: [13, -17,16, 697],
@@ -33,3 +34,5 @@ const mathProblems = [
 
 
 ];
+
+console.log(mathProblems);

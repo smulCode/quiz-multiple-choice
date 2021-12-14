@@ -1,5 +1,6 @@
 const solutionOptions = [170, 18, 5, 2, 26];
 
+
 const quizLayout = () => {
   //container quiz
   const containerQuiz = document.createElement("div");

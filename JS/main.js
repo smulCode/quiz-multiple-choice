@@ -1,4 +1,6 @@
-import("./module/quiz.js")
+import("./modules/quiz.js")
+import("./modules/mathProblems.js")
+
 const game = document.getElementById("game");
 
 
@@ -16,7 +18,7 @@ const ButtonQuiz = () => {
   // startBtn.addEventListener("click", function () {
   //   (async () => {
   //     try {
-  //       let app = await import("./quiz.js");
+  //       let app = await import("./modules/quiz.js");
   //       console.log("startgame");
   
   //       startBtn.classList.add("display-none");

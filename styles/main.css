@@ -94,6 +94,9 @@ button:hover {
   margin: 10px auto;
   padding: 5px 20px;
 }
+.question-bar:hover {
+  cursor: pointer;
+}
 .question-bar:nth-child(odd)::before {
   counter-increment: li;
   content: "" counter(li);
