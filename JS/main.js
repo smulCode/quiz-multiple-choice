@@ -1,5 +1,5 @@
+
 import("./modules/quiz.js")
-import("./modules/mathProblems.js")
 
 const game = document.getElementById("game");
 

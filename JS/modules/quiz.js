@@ -1,7 +1,48 @@
-const solutionOptions = [170, 18, 5, 2, 26];
+
+const mathProblems = [
+  {
+    question: "what is 49 - 32",
+    correct_answer: 17,
+    incorrect_answer: [13, -17, 16, 697],
+    all_answers: [17, 13, -17, 16, 697],
+  },
+  {
+    question: "what is 70 - 14",
+    correct_answer: 56,
+    incorrect_answer: [18, 39, 79, 34],
+    all_answers: [18, 39, 56, 79, 34],
+  },
+  {
+    question: "what is 80 - 15",
+    correct_answer: 65,
+    incorrect_answer: [74, 93, 40, 975],
+    all_answers: [74, 65, 93, 40, 975],
+  },
+  {
+    question: "what is 10 - 20",
+    correct_answer: -10,
+    incorrect_answer: [-350, -15, -34, -34],
+    all_answers: [-350, -10, -15, -34, -34],
+  },
+  {
+    question: "what is 56 + 11",
+    correct_answer: 67,
+    incorrect_answer: [102, 37, 44, 50],
+    all_answers: [102, 37, 67, 44, 50],
+  },
+  {
+    question: "what is 21 + 16",
+    correct_answer: 5,
+    incorrect_answer: [170, 18, 2, 26],
+    all_answers: [5, 170, 18, 2, 26],
+  },
+];
 
 
-const quizLayout = () => {
+
+let counter = 1;
+
+const quiz = (mathProblem) => {
   //container quiz
   const containerQuiz = document.createElement("div");
   containerQuiz.classList.add("container-quiz");
@@ -12,38 +53,40 @@ const quizLayout = () => {
   genreTitle.innerHTML = "Math Problem";
 
   //quest counter
+
   const questionCounter = document.createElement("div");
   questionCounter.classList.add("question-counter");
-  questionCounter.innerHTML = "1/6";
-  //show question number instead of 1/10
+  questionCounter.innerHTML = `${counter++}/${mathProblems.length}`;
 
   //question
-  const question = document.createElement("div");
-  question.classList.add("question");
-  question.innerHTML = "What is 21 - 16";
+
+  const mathQuestion = document.createElement("div");
+  mathQuestion.classList.add("math-question");
+  mathQuestion.innerHTML = mathProblem.question;
 
   //multiple choice list
   const solutions = document.createElement("ul");
   solutions.classList.add("solutions");
 
   //multiple choice list items
+  // let solutionOptions = mathProblem.correct_answer + ',' + mathProblem.incorrect_answer;
 
-  solutionOptions.forEach((option) => {
+  mathProblem.all_answers.forEach((answer) => {
     const questionBar = document.createElement("li");
     questionBar.classList.add("question-bar");
-    const questionText = document.createElement("p");
-    questionText.classList.add("question-text");
-    questionText.innerText = option;
+    // const questionText = document.createElement("p");
+    // questionText.classList.add("question-text");
+    questionBar.innerText = answer;
 
     solutions.append(questionBar);
-    questionBar.append(questionText);
+    // questionBar.append(questionText);
   });
 
   //add to container
   game.append(containerQuiz);
   containerQuiz.appendChild(genreTitle);
   containerQuiz.appendChild(questionCounter);
-  containerQuiz.appendChild(question);
+  containerQuiz.appendChild(mathQuestion);
   containerQuiz.appendChild(solutions);
 
   //buttons
@@ -57,8 +100,10 @@ const quizLayout = () => {
 
   game.append(previousButton);
   game.append(nextButton);
+
+
 };
 
-quizLayout();
 
+mathProblems.forEach((mathProblem) => quiz(mathProblem));
 
