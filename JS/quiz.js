@@ -32,7 +32,7 @@ const quizLayout = () => {
     questionBar.classList.add("question-bar");
     const questionText = document.createElement("p");
     questionText.classList.add("question-text");
-    questionText.innerHTML = option;
+    questionText.innerText = option;
 
     solutions.append(questionBar);
     questionBar.append(questionText);

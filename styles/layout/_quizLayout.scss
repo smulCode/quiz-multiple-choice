@@ -46,6 +46,9 @@
   border-radius: 2px;
   margin: 10px auto;
   padding: 5px 20px;
+  
+
+ 
 
   // border: 1px solid red;
 
@@ -57,9 +60,11 @@
     outline: 15px solid teal;
     background-color: white;
     border-radius: 50%;
-    padding: 5px 20px;
-    //  background-color:white;
-    //  clip-path: circle(50% at 50% 50%);
+    width: 3rem;
+    height: 3rem;
+
+    
+
   }
   &:nth-child(even)::after {
     counter-increment: li;
@@ -69,6 +74,12 @@
     outline: 15px solid teal;
     background-color: white;
     border-radius: 50%;
-    padding: 5px 20px;
+    width: 3rem;
+    height: 3rem;
   }
+}
+
+p{
+  padding-left: 1.5em;
+ 
 }

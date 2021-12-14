@@ -87,7 +87,8 @@ body {
   outline: 15px solid teal;
   background-color: white;
   border-radius: 50%;
-  padding: 5px 20px;
+  width: 3rem;
+  height: 3rem;
 }
 .question-bar:nth-child(even)::after {
   counter-increment: li;
@@ -97,9 +98,10 @@ body {
   outline: 15px solid teal;
   background-color: white;
   border-radius: 50%;
-  padding: 5px 20px;
+  width: 3rem;
+  height: 3rem;
 }
 
-body {
-  counter-reset: question;
+p {
+  padding-left: 1.5em;
 }/*# sourceMappingURL=main.css.map */
