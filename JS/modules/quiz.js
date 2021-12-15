@@ -115,14 +115,16 @@ mathProblems.forEach((mathProblem) => quiz(mathProblem));
 function selectQuestion() {
   const questionSelection = this;
   // const correctAnswer = document.getElementById("correctAnswer");
-  const correctAnswer = document.getElementById("correctAnswer").value;
+  const correctAnswer = document.querySelectorAll("[data-answer='correct']");
   console.log(correctAnswer);
 
   if (questionSelection.dataset.answer === "correct") {
     questionSelection.classList.add("correct-answer");
+
   } else if (questionSelection.dataset.answer === "incorrect") {
     questionSelection.classList.add("incorrect-answer");
     correctAnswer.classList.add("correct-answer");
+
   } else {
     console.log("error");
   }
