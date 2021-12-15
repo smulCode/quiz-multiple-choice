@@ -118,28 +118,33 @@ const quiz = (mathProblem) => {
 
 };
 
-mathProblems.forEach((mathProblem) => quiz(mathProblem));
-// quiz(mathProblems[0]);
+// mathProblems.forEach((mathProblem) => quiz(mathProblem));
+quiz(mathProblems[0]);
 
 
 
 function selectQuestion() {
   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
+
   const questionSelection = this;
 
   if (questionSelection.dataset.answer === "correct") {
     questionSelection.classList.add("correct-answer");
-   
+    questionSelection.setAttribute("data-user", "userCorrect")
+  
+
     
   } else if (questionSelection.dataset.answer === "incorrect") {
     questionSelection.classList.add("incorrect-answer");
+    questionSelection.setAttribute("data-user", "userIncorrect")
     showCorrectAnswer()
+  
 
 
   } else {
     console.log("error");
   }
-
+  checkAnswered()
   allQuestions.forEach((question) => question.removeEventListener("click", selectQuestion));
 
 }
@@ -156,6 +161,25 @@ function showCorrectAnswer(){
  
 });
 }
+
+function checkAnswered() {
+  const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
+  // console.log(allQuestions);
+  allQuestions.forEach((question) =>{
+    if (question.dataset.user === "userCorrect") {
+          console.log('good');
+      
+      }else if(question.dataset.user === "userIncorrect"){
+        console.log('bad');
+      }else{
+        console.log('error check answered');
+      }
+  })
+
+//   
+}
+
+
 
 //array
 
