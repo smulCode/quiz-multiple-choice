@@ -112,30 +112,35 @@ const quiz = (mathProblem) => {
 
 mathProblems.forEach((mathProblem) => quiz(mathProblem));
 
+
+
 function selectQuestion() {
   const questionSelection = this;
-  // const correctAnswer = document.getElementById("correctAnswer");
-  const correctAnswer = document.querySelectorAll("[data-answer='correct']");
-  console.log(correctAnswer);
 
   if (questionSelection.dataset.answer === "correct") {
     questionSelection.classList.add("correct-answer");
 
   } else if (questionSelection.dataset.answer === "incorrect") {
     questionSelection.classList.add("incorrect-answer");
-    correctAnswer.classList.add("correct-answer");
+    showCorrectAnswer()
 
   } else {
     console.log("error");
   }
 }
 
-// function highlight(){
-//  const correctAnswer = this.target.dataset.answer(correct)
-//  console.log(correctAnswer);
-// }
+function showCorrectAnswer(){
+  const questBar = document.querySelectorAll(".question-bar");
+  Array.from(questBar).forEach(function(element, index) {
 
-// highlight();
+    if (element.dataset.answer === "correct") {
+      console.log(index);
+      element.classList.add("correct-answer")
+    }
+ 
+});
+}
+
 
 // function questionChecker() {
 //   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
@@ -150,4 +155,4 @@ function selectQuestion() {
 // }
 
 ///if you click correct answer turn green
-///if you click wrong answer turn red and highlight the correct answer
+///if you click wrong answer turn red and showCorrectAnswer the correct answer

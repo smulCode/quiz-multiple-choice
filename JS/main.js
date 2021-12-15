@@ -8,7 +8,7 @@ const game = document.getElementById("game");
 
 
 const ButtonQuiz = () => {
-  console.log("yes");
+  // console.log("yes");
   const startBtn = document.createElement("button");
   startBtn.classList.add("start-btn");
   startBtn.innerText = "Start";
