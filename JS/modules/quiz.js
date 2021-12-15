@@ -4,6 +4,8 @@ const mathProblems = [
     correct_answer: 17,
     incorrect_answer: [13, -17, 16, 697],
     all_answers: [17, 13, -17, 16, 697],
+    // //hasAnswered:true,
+    // userAnswer:null,
   },
   {
     question: "what is 70 - 14",
@@ -36,6 +38,13 @@ const mathProblems = [
     all_answers: [5, 170, 18, 2, 26],
   },
 ];
+
+
+// let user = [{
+//   hasAnswered:false,
+//   userAnswer:null,
+// }]
+
 
 let score = 0;
 let count = 1;
@@ -78,9 +87,10 @@ const quiz = (mathProblem) => {
     if (answer === mathProblem.correct_answer) {
       questionBar.setAttribute("data-answer", "correct");
       questionBar.setAttribute("Value", mathProblem.correct_answer);
-      questionBar.setAttribute("id", "correctAnswer");
+      // questionBar.setAttribute("id", "correctAnswer");
     } else {
       questionBar.setAttribute("data-answer", "incorrect");
+      
     }
 
     solutions.append(questionBar);
@@ -105,42 +115,49 @@ const quiz = (mathProblem) => {
   game.append(previousButton);
   game.append(nextButton);
 
-  // const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
-  // // console.log(allQuestions);
-  // allQuestions.forEach((question) => questionBar.removeEventListener("click", questionChecker));
+
 };
 
 mathProblems.forEach((mathProblem) => quiz(mathProblem));
+// quiz(mathProblems[0]);
 
 
 
 function selectQuestion() {
+  const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
   const questionSelection = this;
 
   if (questionSelection.dataset.answer === "correct") {
     questionSelection.classList.add("correct-answer");
-
+   
+    
   } else if (questionSelection.dataset.answer === "incorrect") {
     questionSelection.classList.add("incorrect-answer");
     showCorrectAnswer()
 
+
   } else {
     console.log("error");
   }
+
+  allQuestions.forEach((question) => question.removeEventListener("click", selectQuestion));
+
 }
 
 function showCorrectAnswer(){
   const questBar = document.querySelectorAll(".question-bar");
+  // console.log(questBar);
   Array.from(questBar).forEach(function(element, index) {
 
     if (element.dataset.answer === "correct") {
-      console.log(index);
+      // console.log(index);
       element.classList.add("correct-answer")
     }
  
 });
 }
 
+//array
 
 // function questionChecker() {
 //   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
@@ -155,4 +172,6 @@ function showCorrectAnswer(){
 // }
 
 ///if you click correct answer turn green
-///if you click wrong answer turn red and showCorrectAnswer the correct answer
+///if you click wrong answer turn red and showCorrectAnswer() the correct answer
+
+// target
