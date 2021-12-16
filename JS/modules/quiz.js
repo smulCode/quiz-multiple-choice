@@ -208,7 +208,8 @@ function checkAnswered() {
 
 
 function nextMathProblem(){
-
+  mathProblemNr = mathProblemNr + 1;
+ 
   console.log('next');
  
 
