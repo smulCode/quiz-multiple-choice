@@ -29,7 +29,7 @@ const ButtonQuiz = () => {
   // });
 };
 
-ButtonQuiz();
+// ButtonQuiz();
 
 
 

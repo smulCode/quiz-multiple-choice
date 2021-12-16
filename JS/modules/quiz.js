@@ -4,8 +4,6 @@ const mathProblems = [
     correct_answer: 17,
     incorrect_answer: [13, -17, 16, 697],
     all_answers: [17, 13, -17, 16, 697],
-    // //hasAnswered:true,
-    // userAnswer:null,
   },
   {
     question: "what is 70 - 14",
@@ -40,26 +38,31 @@ const mathProblems = [
 ];
 
 
-// let user = [{
-//   hasAnswered:false,
-//   userAnswer:null,
-// }]
+let user = {
+  "correctAnswers":0,
+  "incorrectAnswers":0,
+  "selectedAnswers":[],
 
+}
 
 let score = 0;
 let count = 1;
+const amountMathProblems = mathProblems.length;
+let mathProblemNr = 0;
 
 const quiz = (mathProblem) => {
+
   //container quiz
   const containerQuiz = document.createElement("div");
   containerQuiz.classList.add("container-quiz");
+  containerQuiz.setAttribute("data-index",mathProblems.indexOf(mathProblem));
 
   //title
   const quizTitle = document.createElement("div");
   quizTitle.classList.add("quiz-title");
   quizTitle.innerHTML = "Math Problem";
 
-  //quest counter
+  //quest count
 
   const questionCount = document.createElement("div");
   questionCount.classList.add("question-count");
@@ -76,8 +79,6 @@ const quiz = (mathProblem) => {
   solutions.classList.add("solutions");
 
   //multiple choice list items
-  // let solutionOptions = mathProblem.correct_answer + ',' + mathProblem.incorrect_answer;
-
   mathProblem.all_answers.forEach((answer) => {
     const questionBar = document.createElement("li");
     questionBar.classList.add("question-bar");
@@ -87,9 +88,11 @@ const quiz = (mathProblem) => {
     if (answer === mathProblem.correct_answer) {
       questionBar.setAttribute("data-answer", "correct");
       questionBar.setAttribute("Value", mathProblem.correct_answer);
-      // questionBar.setAttribute("id", "correctAnswer");
+
     } else {
       questionBar.setAttribute("data-answer", "incorrect");
+      questionBar.setAttribute("value", questionBar.innerHTML);
+    
       
     }
 
@@ -107,19 +110,35 @@ const quiz = (mathProblem) => {
   const previousButton = document.createElement("button");
   previousButton.classList.add("previous-btn");
   previousButton.innerHTML = "vorige";
+  previousButton.addEventListener("click",previousMathProblem)
 
   const nextButton = document.createElement("button");
   nextButton.classList.add("next-btn");
   nextButton.innerHTML = "volgende";
+  nextButton.addEventListener("click",nextMathProblem)
 
   game.append(previousButton);
   game.append(nextButton);
 
+  
 
 };
 
 // mathProblems.forEach((mathProblem) => quiz(mathProblem));
-quiz(mathProblems[0]);
+// mathProblems.forEach((mathProblem) => console.log(mathProblems.indexOf(mathProblem)));
+
+
+quiz(mathProblems[mathProblemNr])
+
+
+function currentMathProblemIndex(){
+  let currentIndex = document.querySelector(".container-quiz").dataset.index;
+  console.log(currentIndex);
+
+  
+  
+}
+currentMathProblemIndex()
 
 
 
@@ -162,40 +181,55 @@ function showCorrectAnswer(){
 });
 }
 
+
+
+
+
+
 function checkAnswered() {
   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
-  // console.log(allQuestions);
   allQuestions.forEach((question) =>{
     if (question.dataset.user === "userCorrect") {
-          console.log('good');
-      
+      user.selectedAnswers.push(question.value);
+      user["correctAnswers"] = (user["correctAnswers"]+1) || 1 ;
+      console.log(user);
+ 
       }else if(question.dataset.user === "userIncorrect"){
-        console.log('bad');
+        user.selectedAnswers.push(question.value);
+        user["incorrectAnswers"] = (user["incorrectAnswers"]+1) || 1 ;
+        console.log(user);
+      
       }else{
-        console.log('error check answered');
+        // console.log('error check answered');
       }
   })
 
-//   
 }
 
 
+function nextMathProblem(){
 
-//array
+  console.log('next');
+ 
 
-// function questionChecker() {
-//   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
-//   console.log(allQuestions);
-//   // allQuestions.forEach((question) => questionBar.removeEventListener("click", questionChecker));
-//   // if (questionBar.getAttribute === ("correct_answer")) {
-//   //   questionBar.classList.add("correct-answer")
-//   // }
-//   // else{
-//   //   questionBar.classList.add("incorrect-answer")
-//   // }
-// }
+}
 
-///if you click correct answer turn green
-///if you click wrong answer turn red and showCorrectAnswer() the correct answer
+function previousMathProblem(){
+  // const previousBtn = document.querySelector("previous-btn");
+  console.log('previous');
+  
+  
+}
 
-// target
+
+//on nextbtn click show next problem
+//onclick next look for indexCurrentProblem
+//if current index is not last problem show next problem
+//if current index is last problem check if al allQuestions are answered
+//if all question are answered count correct answers and show at finish
+
+//on previousbtn click show previous problem//
+//onclick previous look for indexCurrentProblem
+//if current index is not first problem show previous problem
+//if current index is first problem stay on first
+//if question are answered ,show answered questions
