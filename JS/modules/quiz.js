@@ -54,10 +54,10 @@ let mathProblemNr = 0 ;
 let quizQuestion = mathProblems[mathProblemNr];
 
 
-let quiz = (mathProblem) => {
+const quiz = (mathProblem) => {
   //index
   user["userCurrentQuestion"] = mathProblems.indexOf(mathProblem);
-console.log(user);
+// console.log(user);
   //container quiz
   const containerQuiz = document.createElement("div");
   containerQuiz.classList.add("container-quiz");
