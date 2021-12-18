@@ -1,3 +1,8 @@
+// const amountMathProblems = mathProblems.length;
+let count = 1;
+let currentIndex = 0;
+let mathProblemNr = 0 ;
+let quizQuestion = mathProblems[mathProblemNr];
 
 import {user} from "./userData.js"
 import {mathProblems} from "./mathProblems.js"
@@ -8,11 +13,6 @@ import {previousMathProblem} from "./functions.js"
 // let score = 0;
 
 
-// const amountMathProblems = mathProblems.length;
-let count = 1;
-let currentIndex = 0;
-let mathProblemNr = 0 ;
-let quizQuestion = mathProblems[mathProblemNr];
 
 
 export const quiz = (mathProblem) => {

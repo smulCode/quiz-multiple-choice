@@ -46,11 +46,11 @@ export function currentMathProblemIndex() {
       if (question.dataset.user === "userCorrect") {
         user.selectedAnswers.push(question.value);
         user["correctAnswers"] = user["correctAnswers"] + 1 || 1;
-        console.log(user);
+        // console.log(user);
       } else if (question.dataset.user === "userIncorrect") {
         user.selectedAnswers.push(question.value);
         user["incorrectAnswers"] = user["incorrectAnswers"] + 1 || 1;
-        console.log(user);
+        // console.log(user);
       } else {
         // console.log('error check answered');
       }
@@ -59,10 +59,10 @@ export function currentMathProblemIndex() {
   
   export function nextMathProblem() {
     currentMathProblemIndex();
-  mathProblemNr = mathProblemNr + 1;
-  quizQuestion = mathProblems[mathProblemNr];
+//   mathProblemNr = mathProblemNr + 1;
+//   quizQuestion = mathProblems[mathProblemNr];
   
-  quiz(quizQuestion)
+//   quiz(quizQuestion)
     console.log("next");
   
     
