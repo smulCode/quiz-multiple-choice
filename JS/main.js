@@ -1,9 +1,7 @@
 
-import("./modules/quiz.js")
+import {quiz} from "./modules/quiz.js"
 
 const game = document.getElementById("game");
-
-
 
 
 

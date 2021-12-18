@@ -1,4 +1,5 @@
-const mathProblems = [
+
+export const mathProblems = [
   {
     question: "what is 49 - 32",
     correct_answer: 17,
