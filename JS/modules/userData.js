@@ -5,5 +5,7 @@ export let user = {
     incorrectAnswers: 0,
     selectedAnswers: [],
     userCurrentQuestion:0,
+    savedAnswers:[],
+
   
   };

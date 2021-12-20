@@ -20,7 +20,7 @@ export function currentMathProblemIndex() {
       questionSelection.classList.add("incorrect-answer");
       questionSelection.setAttribute("data-user", "userIncorrect");
       showCorrectAnswer();
-   
+      console.log(user);
     } 
     else {
       console.log("error");
@@ -46,13 +46,17 @@ export function currentMathProblemIndex() {
     const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
     allQuestions.forEach((question) => {
       if (question.dataset.user === "userCorrect") {
+ 
         user.selectedAnswers.push(question.value)
         user["correctAnswers"] = user["correctAnswers"] + 1 || 1;
-        // console.log(user);
+  
+        console.log(user);
       } else if (question.dataset.user === "userIncorrect") {
+  
         user.selectedAnswers.push(question.value);
         user["incorrectAnswers"] = user["incorrectAnswers"] + 1 || 1;
-        // console.log(user);
+       
+        console.log(user);
       } else {
         // console.log('error check answered');
       }

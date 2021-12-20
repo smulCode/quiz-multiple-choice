@@ -123,8 +123,7 @@ else{
 
 }
   console.log("next");
-  
-  clickedAnswers()
+ 
 }
 
 function previousMathProblem() {
@@ -152,7 +151,8 @@ function previousMathProblem() {
   console.log(currentQuiz);
   }
   console.log("previous");
-  clickedAnswers()
+ 
+  highlightAnswer()
 }
 
 function removeQuiz(currentQuiz) {
@@ -166,39 +166,61 @@ function removeQuiz(currentQuiz) {
 }
 
 
-function clickedAnswers() {
-  const selectedAnswers = user["selectedAnswers"];
- 
+function highlightAnswer(){
+  const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
 
-  // if (selectedAnswers === )
-  Array.from(selectedAnswers).forEach(function (selectedAnswer, index) {
+  const answeredQuestions = user.selectedAnswers;
+  // const values = answeredQuestions.values();
+  // console.log(values);
+  console.log(answeredQuestions);
 
-    if (selectedAnswer === user["correct_answer"]) {
-  
 
-      console.log('green');
+  for (const value of answeredQuestions) {
+    let answerValue = value;
+    console.log(answerValue);
+  }
+
+  answeredQuestions.forEach((question) => {
+    if (question.value == 17) {
+    
+      console.log(answeredQuestions);
+    
+
+      console.log('yes');
     }
     else {
-      // selectedAnswer.classList.add("incorrect-answer");
-  
-      console.log('red');
+      console.log('error check answered');
     }
   });
 
-
 }
 
+//show answer selectedAnswers
+// if userCurrentQuestion has same value as currentQuestion color background and remove click event
 
-//on nextbtn click show next problem
-//onclick next look for indexCurrentProblem
-//if current index is not last problem show next problem
-//if current index is last problem check if al allQuestions are answered
-//if all question are answered count correct answers and show at finish
 
-//on previousbtn click show previous problem//
-//onclick previous look for indexCurrentProblem
-//if current index is not first problem show previous problem
-//if current index is first problem stay on first
-//if question are answered ,show answered questions
 
-//when I click start quiz loads in
+// function clickedAnswers() {
+//   const selectedAnswers = user["selectedAnswers"];
+ 
+
+//   // if (selectedAnswers === )
+//   Array.from(selectedAnswers).forEach(function (selectedAnswer, index) {
+
+//     if (selectedAnswer === math["correct_answer"]) {
+  
+
+//       console.log('green');
+//     }
+//     else {
+//       // selectedAnswer.classList.add("incorrect-answer");
+  
+//       console.log('red');
+//     }
+//   });
+
+
+// }
+
+
+//
