@@ -43,7 +43,7 @@ export const quiz = (mathProblem) => {
 
   const mathQuestion = document.createElement("div");
   mathQuestion.classList.add("math-question");
-  mathQuestion.innerHTML = mathProblem.question;
+  mathQuestion.innerHTML = `what is ${mathProblem.question}`;
 
   //multiple choice list
   const solutions = document.createElement("ul");
@@ -88,7 +88,9 @@ export const quiz = (mathProblem) => {
   nextButton.classList.add("next-btn");
   nextButton.innerHTML = "volgende";
   nextButton.addEventListener("click", nextMathProblem);
-
+  if (currentIndex  === amountMathProblems - 1 ) {
+    nextButton.removeEventListener("click", nextMathProblem);
+  } 
   quizRender.append(buttonContainer);
   buttonContainer.appendChild(previousButton);
   buttonContainer.appendChild(nextButton);
@@ -105,15 +107,12 @@ function nextMathProblem() {
   let currentQuiz = user["userCurrentQuestion"];
   let nextQuizIndex = ++currentIndex;
   quizQuestion = mathProblems[nextQuizIndex];
-console.log(currentIndex);
+// console.log(currentIndex);
   if (nextQuizIndex === 0) {
     nextQuizIndex = nextQuizIndex + 1;
     quizQuestion = mathProblems[nextQuizIndex];
     quiz(quizQuestion);
     removeQuiz(currentQuiz);
-  } else if (nextQuizIndex === amountMathProblems) {
-    const nextButton = document.querySelector(".next-btn");
-    nextButton.removeEventListener("click", nextMathProblem);
   } else {
     quiz(quizQuestion);
     removeQuiz(currentQuiz);
@@ -124,7 +123,6 @@ console.log(currentIndex);
 function previousMathProblem() {
   let currentQuiz = user["userCurrentQuestion"];
   let previousQuizIndex = --currentIndex;
-  console.log(previousQuizIndex);
   quizQuestion = mathProblems[previousQuizIndex];
   ;
 
@@ -147,7 +145,7 @@ console.log(previousQuizIndex);
   }
   console.log("previous");
 
-  // showSavedAnswers()
+  showSavedAnswers()
 }
 
 function removeQuiz(currentQuiz) {
@@ -159,35 +157,55 @@ function removeQuiz(currentQuiz) {
   }
 }
 
-// function showSavedAnswers() {
-//   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
 
-//   console.log(user.savedAnswers);
-//   const savedAnswers = user.savedAnswers;
 
-//   allQuestions.forEach((question) => {
-//     const savedAnswersValue = savedAnswers.includes(question.value);
-//     if (savedAnswersValue === true) {
-//       console.log(savedAnswersValue);
-//       if (savedAnswersValue === "correct") {
-//         question.classList.add("correct-answer");
-//         console.log("green");
-//       }
-//       if (savedAnswersValue === "incorrect")
-//         question.classList.add("incorrect-answer");
-//       console.log("red");
-//     } else {
-//       // console.log("error");
-//       console.log(savedAnswers.includes(question.value));
-//     }
-//     //
-//   });
-//   // allQuestions.forEach((question) =>
-//   //   question.removeEventListener("click", selectQuestion)
-//   // );
-// }
 
-// // showSavedAnswers()
+
+function showSavedAnswers() {
+  const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
+
+//   console.log(allQuestions);
+// console.log(user.savedAnswersData);
+// console.log(user.savedAnswersIndex);
+
+const savedData = user.savedAnswersData
+const answerData = [];
+
+
+
+savedData.forEach((data) => {
+ answerData.push(data);
+console.log(answerData);
+
+})
+  allQuestions.forEach((question, index) => {
+    // console.log(`${question.value}, ${index}`);
+// console.log(question.innerHTML);
+// console.log(savedData);
+
+    if (savedData[index] === question.value){
+      console.log('yes');
+      // console.log(savedData[index]);
+      question.classList.add("correct-answer")
+      allQuestions.forEach((question) =>
+      question.removeEventListener("click", selectQuestion)
+    );
+    }
+    else if (savedData[index] == question.innerHTML) {
+      console.log('no');
+      // console.log(savedData[index]);
+      question.classList.add("incorrect-answer")
+      allQuestions.forEach((question) =>
+      question.removeEventListener("click", selectQuestion));
+    }
+    else{
+      // console.log("error");
+    }
+  })
+
+}
+
+// //
 
 //if (typeofAnswer !=== undefined){
 //

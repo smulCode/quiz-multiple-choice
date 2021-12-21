@@ -6,6 +6,8 @@ export let user = {
     selectedAnswers: [],
     userCurrentQuestion:0,
     savedAnswers:[],
+    savedAnswersData:[],
+    savedAnswersIndex:[],
 
   
   };
