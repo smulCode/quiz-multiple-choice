@@ -7,6 +7,7 @@ export function currentMathProblemIndex() {
   }
   
   export function selectQuestion() {
+
     const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
     const questionSelection = this;
   
@@ -46,14 +47,17 @@ export function currentMathProblemIndex() {
     const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
     allQuestions.forEach((question) => {
       if (question.dataset.user === "userCorrect") {
- 
         user.selectedAnswers.push(question.value)
+        user.savedAnswers.push(question.value)
+
+ 
         user["correctAnswers"] = user["correctAnswers"] + 1 || 1;
   
         console.log(user);
       } else if (question.dataset.user === "userIncorrect") {
   
         user.selectedAnswers.push(question.value);
+        user.savedAnswers.push(question.value)
         user["incorrectAnswers"] = user["incorrectAnswers"] + 1 || 1;
        
         console.log(user);

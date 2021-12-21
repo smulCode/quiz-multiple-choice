@@ -6,26 +6,25 @@ import { checkAnswered } from "./functions.js";
 // import {previousMathProblem} from "./functions.js"
 
 const amountMathProblems = mathProblems.length;
-const firstMathProblem = mathProblems[mathProblems.length - mathProblems.length] ;
+const firstMathProblem =
+  mathProblems[mathProblems.length - mathProblems.length];
 const lastMathProblem = mathProblems[mathProblems.length - 1];
 let currentIndex = 0;
 let quizQuestion = mathProblems[currentIndex];
 let count = user["userCurrentQuestion"];
 // let score = 0;
 
-
 export const quiz = (mathProblem) => {
   //index
   user["userCurrentQuestion"] = mathProblems.indexOf(mathProblem);
   // console.log(user);
   const quizRender = document.createElement("div");
-  quizRender.classList.add("quiz-render")
+  quizRender.classList.add("quiz-render");
   quizRender.setAttribute("data-index", mathProblems.indexOf(mathProblem));
-  
+
   //container quiz
   const containerQuiz = document.createElement("div");
   containerQuiz.classList.add("container-quiz");
- 
 
   //title
   const quizTitle = document.createElement("div");
@@ -36,7 +35,9 @@ export const quiz = (mathProblem) => {
 
   const questionCount = document.createElement("div");
   questionCount.classList.add("question-count");
-  questionCount.innerHTML = `${user["userCurrentQuestion"] + 1}/${mathProblems.length}`;
+  questionCount.innerHTML = `${user["userCurrentQuestion"] + 1}/${
+    mathProblems.length
+  }`;
 
   //question
 
@@ -54,10 +55,9 @@ export const quiz = (mathProblem) => {
     questionBar.classList.add("question-bar");
     questionBar.innerText = answer;
     questionBar.addEventListener("click", selectQuestion);
-
     if (answer === mathProblem.correct_answer) {
       questionBar.setAttribute("data-answer", "correct");
-      questionBar.setAttribute("Value", mathProblem.correct_answer);
+      questionBar.setAttribute("Value", eval(mathProblem.correct_answer));
     } else {
       questionBar.setAttribute("data-answer", "incorrect");
       questionBar.setAttribute("value", questionBar.innerHTML);
@@ -76,11 +76,13 @@ export const quiz = (mathProblem) => {
 
   //buttons
   const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("button-container")
+  buttonContainer.classList.add("button-container");
   const previousButton = document.createElement("button");
   previousButton.classList.add("previous-btn");
   previousButton.innerHTML = "vorige";
-  previousButton.addEventListener("click", previousMathProblem);
+  if (currentIndex >= 1){
+    previousButton.addEventListener("click", previousMathProblem);
+  }
 
   const nextButton = document.createElement("button");
   nextButton.classList.add("next-btn");
@@ -98,61 +100,54 @@ export const quiz = (mathProblem) => {
 quiz(quizQuestion);
 
 
+
 function nextMathProblem() {
-  let currentQuiz =  user["userCurrentQuestion"]
+  let currentQuiz = user["userCurrentQuestion"];
   let nextQuizIndex = ++currentIndex;
   quizQuestion = mathProblems[nextQuizIndex];
-
-if (nextQuizIndex === 0){
-  nextQuizIndex = nextQuizIndex + 1;
-  quizQuestion = mathProblems[nextQuizIndex];
-  quiz(quizQuestion);
-  removeQuiz(currentQuiz);
-
-
-}
-else if (nextQuizIndex === amountMathProblems ){
-  const nextButton = document.querySelector(".next-btn")
-  nextButton.removeEventListener("click",nextMathProblem);
-  
-}
-
-else{
-  quiz(quizQuestion);
-  removeQuiz(currentQuiz);
-
-}
+console.log(currentIndex);
+  if (nextQuizIndex === 0) {
+    nextQuizIndex = nextQuizIndex + 1;
+    quizQuestion = mathProblems[nextQuizIndex];
+    quiz(quizQuestion);
+    removeQuiz(currentQuiz);
+  } else if (nextQuizIndex === amountMathProblems) {
+    const nextButton = document.querySelector(".next-btn");
+    nextButton.removeEventListener("click", nextMathProblem);
+  } else {
+    quiz(quizQuestion);
+    removeQuiz(currentQuiz);
+  }
   console.log("next");
- 
 }
 
 function previousMathProblem() {
-  let currentQuiz =  user["userCurrentQuestion"];
+  let currentQuiz = user["userCurrentQuestion"];
   let previousQuizIndex = --currentIndex;
+  console.log(previousQuizIndex);
   quizQuestion = mathProblems[previousQuizIndex];
+  ;
 
-  if (previousQuizIndex === amountMathProblems - 1 ){
+  if (previousQuizIndex === amountMathProblems) {
     previousQuizIndex = previousQuizIndex - 1;
     quizQuestion = mathProblems[previousQuizIndex];
+console.log(previousQuizIndex);
+    quiz(quizQuestion);
+    removeQuiz(currentQuiz);
+  } 
+  
+  else if (previousQuizIndex < 0) {
+    previousQuizIndex = 0;
+    const previousButton = document.querySelector(".previous-btn");
+    previousButton.removeEventListener("click", previousMathProblem);
+  } else {
+    quiz(quizQuestion);
+    removeQuiz(currentQuiz);
 
-    quiz(quizQuestion);
-    removeQuiz(currentQuiz);
-  
-  }
-  else if (previousQuizIndex === -1 ){
-    const previousButton = document.querySelector(".previous-btn")
-    previousButton.removeEventListener("click",previousMathProblem);
-    
-  }
-  
-  else{
-    quiz(quizQuestion);
-    removeQuiz(currentQuiz);
-  console.log(currentQuiz);
   }
   console.log("previous");
- 
-  highlightAnswer()
+
+  // showSavedAnswers()
 }
 
 function removeQuiz(currentQuiz) {
@@ -162,65 +157,63 @@ function removeQuiz(currentQuiz) {
   } else {
     console.log("full");
   }
-
 }
 
+// function showSavedAnswers() {
+//   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
 
-function highlightAnswer(){
-  const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
+//   console.log(user.savedAnswers);
+//   const savedAnswers = user.savedAnswers;
 
-  const answeredQuestions = user.selectedAnswers;
-  // const values = answeredQuestions.values();
-  // console.log(values);
-  console.log(answeredQuestions);
+//   allQuestions.forEach((question) => {
+//     const savedAnswersValue = savedAnswers.includes(question.value);
+//     if (savedAnswersValue === true) {
+//       console.log(savedAnswersValue);
+//       if (savedAnswersValue === "correct") {
+//         question.classList.add("correct-answer");
+//         console.log("green");
+//       }
+//       if (savedAnswersValue === "incorrect")
+//         question.classList.add("incorrect-answer");
+//       console.log("red");
+//     } else {
+//       // console.log("error");
+//       console.log(savedAnswers.includes(question.value));
+//     }
+//     //
+//   });
+//   // allQuestions.forEach((question) =>
+//   //   question.removeEventListener("click", selectQuestion)
+//   // );
+// }
 
+// // showSavedAnswers()
 
-  for (const value of answeredQuestions) {
-    let answerValue = value;
-    console.log(answerValue);
-  }
-
-  answeredQuestions.forEach((question) => {
-    if (question.value == 17) {
-    
-      console.log(answeredQuestions);
-    
-
-      console.log('yes');
-    }
-    else {
-      console.log('error check answered');
-    }
-  });
-
-}
+//if (typeofAnswer !=== undefined){
+//
+// }
+//for each question
 
 //show answer selectedAnswers
 // if userCurrentQuestion has same value as currentQuestion color background and remove click event
 
-
-
 // function clickedAnswers() {
 //   const selectedAnswers = user["selectedAnswers"];
- 
 
 //   // if (selectedAnswers === )
 //   Array.from(selectedAnswers).forEach(function (selectedAnswer, index) {
 
 //     if (selectedAnswer === math["correct_answer"]) {
-  
 
 //       console.log('green');
 //     }
 //     else {
 //       // selectedAnswer.classList.add("incorrect-answer");
-  
+
 //       console.log('red');
 //     }
 //   });
 
-
 // }
-
 
 //
