@@ -13,8 +13,27 @@ export let user = {
   };
 
   
-/*
-function estartQuiz(){
-quiz(quizQuestion)
-}
-*/
+
+//  export class users {
+//   constructor(
+//     correctAnswers,
+//     incorrectAnswers,
+//     selectedAnswers,
+//     userCurrentQuestion,
+//     savedAnswers,
+//     savedAnswersData,
+//     savedAnswersIndex) 
+
+//     {
+//     this.correctAnswers = correctAnswers;
+//     this.incorrectAnswers = incorrectAnswers;
+//     this.selectedAnswers = selectedAnswers;
+//     this.userCurrentQuestion = userCurrentQuestion;
+//     this.savedAnswers = savedAnswers;
+//     this.savedAnswersData = savedAnswersData;
+//     this.savedAnswersIndex = savedAnswersIndex;
+//     }
+// }
+
+// export const user1 = new users(0,0,[],0,[],[],[],[])
+

@@ -1,7 +1,7 @@
 import { user } from "./userData.js";
 import { mathProblems } from "./mathProblems.js";
 import { selectQuestion } from "./functions.js";
-// import { getResult } from "./functions.js";
+import { showCorrectAnswer } from "./functions.js";
 // import {nextMathProblem} from "./functions.js"
 // import {previousMathProblem} from "./functions.js"
 
@@ -13,9 +13,6 @@ let currentIndex = 0;
 let quizQuestion = mathProblems[currentIndex];
 let count = user["userCurrentQuestion"];
 // let score = 0;
-
-
-
 
 export const quiz = (mathProblem) => {
   //index
@@ -83,7 +80,7 @@ export const quiz = (mathProblem) => {
   const previousButton = document.createElement("button");
   previousButton.classList.add("previous-btn");
   previousButton.innerHTML = "Previous";
-  if (currentIndex >= 1){
+  if (currentIndex >= 1) {
     previousButton.addEventListener("click", previousMathProblem);
   }
 
@@ -92,13 +89,15 @@ export const quiz = (mathProblem) => {
   nextButton.innerHTML = "Next";
   nextButton.addEventListener("click", nextMathProblem);
 
-
-  if (currentIndex  === amountMathProblems - 1 ) {
+  if (currentIndex === amountMathProblems - 1) {
     nextButton.removeEventListener("click", nextMathProblem);
-  } 
+  }
 
-  if (currentIndex === amountMathProblems - 1 && currentIndex === user.selectedAnswers.length){
-    nextButton.addEventListener("click", getResult)
+  if (
+    currentIndex === amountMathProblems - 1 &&
+    currentIndex === user.selectedAnswers.length
+  ) {
+    nextButton.addEventListener("click", getResult);
   }
   quizRender.append(buttonContainer);
   buttonContainer.appendChild(previousButton);
@@ -110,13 +109,11 @@ export const quiz = (mathProblem) => {
 // setInterval(quiz(quizQuestion),1000);
 quiz(quizQuestion);
 
-
-
 function nextMathProblem() {
   let currentQuiz = user["userCurrentQuestion"];
   let nextQuizIndex = ++currentIndex;
   quizQuestion = mathProblems[nextQuizIndex];
-// console.log(currentIndex);
+  // console.log(currentIndex);
   if (nextQuizIndex === 0) {
     nextQuizIndex = nextQuizIndex + 1;
     quizQuestion = mathProblems[nextQuizIndex];
@@ -127,24 +124,20 @@ function nextMathProblem() {
     removeQuiz(currentQuiz);
   }
   console.log("next");
-
 }
 
 function previousMathProblem() {
   let currentQuiz = user["userCurrentQuestion"];
   let previousQuizIndex = --currentIndex;
   quizQuestion = mathProblems[previousQuizIndex];
-  ;
 
   if (previousQuizIndex === amountMathProblems) {
     previousQuizIndex = previousQuizIndex - 1;
     quizQuestion = mathProblems[previousQuizIndex];
-console.log(previousQuizIndex);
+    console.log(previousQuizIndex);
     quiz(quizQuestion);
     removeQuiz(currentQuiz);
-  } 
-  
-  else if (previousQuizIndex < 0) {
+  } else if (previousQuizIndex < 0) {
     previousQuizIndex = 0;
     const previousButton = document.querySelector(".previous-btn");
     previousButton.removeEventListener("click", previousMathProblem);
@@ -152,10 +145,39 @@ console.log(previousQuizIndex);
     quiz(quizQuestion);
     removeQuiz(currentQuiz);
 
+    if (
+      user.savedAnswers.includes(mathProblems[previousQuizIndex].correct_answer)
+    ) {
+
+      //  new version    
+
+      const allQuestionSelection = Array.from(document.querySelectorAll(".question-bar"));
+      allQuestionSelection.forEach((questionSelection) => {
+        // console.log(questionSelection.dataset.answer);
+        // console.log(mathProblems[previousQuizIndex]);
+        if (questionSelection.dataset.answer === "correct") {
+          questionSelection.classList.add("correct-answer");
+          questionSelection.setAttribute("data-user", "userCorrect");
+        }
+        
+        
+      })
+      //
+
+
+
+      // const questionSelection = document.querySelector(".question-bar");
+      // console.log(questionSelection.dataset.answer);
+      // console.log(mathProblems[previousQuizIndex]);
+      // if (questionSelection.dataset.answer === "correct") {
+      //   questionSelection.classList.add("correct-answer");
+      //   questionSelection.setAttribute("data-user", "userCorrect");
+      // }
+     
+    }
   }
   console.log("previous");
 
-  showSavedAnswers()
 }
 
 function removeQuiz(currentQuiz) {
@@ -169,128 +191,34 @@ function removeQuiz(currentQuiz) {
 
 
 
-function showSavedAnswers() {
-  const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
-
-//   console.log(allQuestions);
-// console.log(user.savedAnswersData);
-// console.log(user.savedAnswersIndex);
-
-const savedData = user.savedAnswersData
-const answerData = [];
-
-const [answer, answersIndex] = user.savedAnswersData;
-// console.log(answer);
-// console.log(answersIndex);
-
-savedData.forEach((data) => {
-   answerData.push(data);
-  // console.log(answerData);
-  
-  })
-  allQuestions.forEach((question, index) => {
-    // console.log(`${question.value}, ${index}`);
-// console.log(question.innerHTML);
-// console.log(savedData);
-// console.log(answer[answersIndex]);
-
-
-    if (savedData[answersIndex] === question.value){
-      // console.log('yes');
-      // console.log(savedData[answersIndex]);
-      question.classList.add("correct-answer")
-      allQuestions.forEach((question) =>
-      question.removeEventListener("click", selectQuestion)
-    );
-    }
-    else if (savedData[answersIndex] == question.innerHTML) {
-      // console.log('no');
-      // console.log(savedData[index]);
-      question.classList.add("incorrect-answer")
-      allQuestions.forEach((question) =>
-      question.removeEventListener("click", selectQuestion));
-    }
-    else{
-      // console.log("error");
-    }
-  })
-
-}
-
-
-
-// //
-
-//if (typeofAnswer !=== undefined){
-//
-// }
-//for each question
-
-//show answer selectedAnswers
-// if userCurrentQuestion has same value as currentQuestion color background and remove click event
-
-// function clickedAnswers() {
-//   const selectedAnswers = user["selectedAnswers"];
-
-//   // if (selectedAnswers === )
-//   Array.from(selectedAnswers).forEach(function (selectedAnswer, index) {
-
-//     if (selectedAnswer === math["correct_answer"]) {
-
-//       console.log('green');
-//     }
-//     else {
-//       // selectedAnswer.classList.add("incorrect-answer");
-
-//       console.log('red');
-//     }
-//   });
-
-// }
-
-//
-
-
-///saveAnswer value
-
-
-
-function getResult(){
-  let quizRender = document.querySelector(".quiz-render")
+function getResult() {
+  let quizRender = document.querySelector(".quiz-render");
   const correctAnswers = user.correctAnswers;
-  console.log('correctAnswers')
- quizRender.remove();
- const resultWindow = document.createElement("div");
- resultWindow.classList.add("result-window");
- resultWindow.innerHTML = `Congratulations! <br> you got ${correctAnswers} of the ${amountMathProblems} correct`;
+  console.log("correctAnswers");
+  quizRender.remove();
+  const resultWindow = document.createElement("div");
+  resultWindow.classList.add("result-window");
+  resultWindow.innerHTML = `Congratulations! <br> you got ${correctAnswers} of the ${amountMathProblems} correct`;
 
- const restartButton = document.createElement("button");
- restartButton.classList.add("restart-btn");
- restartButton.innerHTML = "restart";
- restartButton.addEventListener("click", restartQuiz)
+  const restartButton = document.createElement("button");
+  restartButton.classList.add("restart-btn");
+  restartButton.innerHTML = "restart";
+  restartButton.addEventListener("click", restartQuiz);
 
- resultWindow.appendChild(restartButton);
- game.append(resultWindow);
-
-
+  resultWindow.appendChild(restartButton);
+  game.append(resultWindow);
 }
 
-function restartQuiz(){
+function restartQuiz() {
   const resultWindow = document.querySelector(".result-window");
-  resultWindow.remove()
-  user = {
-
-    correctAnswers: 0,
-    incorrectAnswers: 0,
-    selectedAnswers: [],
-    userCurrentQuestion:0,
-    savedAnswers:[],
-    savedAnswersData:[],
-    savedAnswersIndex:[],
-
-  
-  };
-  quiz(quizQuestion)
-  }
-
-  
+  resultWindow.remove();
+  user.correctAnswers= 0;
+  user.incorrectAnswers= 0;
+  user.selectedAnswers= [];
+  user.userCurrentQuestion=0;
+  user.savedAnswers=[];
+  user.savedAnswersData=[];
+  user.savedAnswersIndex=[];
+  currentIndex = 0;
+  quiz(mathProblems[0]);
+}
