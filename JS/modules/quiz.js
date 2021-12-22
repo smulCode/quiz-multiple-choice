@@ -1,7 +1,7 @@
 import { user } from "./userData.js";
 import { mathProblems } from "./mathProblems.js";
 import { selectQuestion } from "./functions.js";
-import { checkAnswered } from "./functions.js";
+// import { getResult } from "./functions.js";
 // import {nextMathProblem} from "./functions.js"
 // import {previousMathProblem} from "./functions.js"
 
@@ -13,6 +13,9 @@ let currentIndex = 0;
 let quizQuestion = mathProblems[currentIndex];
 let count = user["userCurrentQuestion"];
 // let score = 0;
+
+
+
 
 export const quiz = (mathProblem) => {
   //index
@@ -79,23 +82,29 @@ export const quiz = (mathProblem) => {
   buttonContainer.classList.add("button-container");
   const previousButton = document.createElement("button");
   previousButton.classList.add("previous-btn");
-  previousButton.innerHTML = "vorige";
+  previousButton.innerHTML = "Previous";
   if (currentIndex >= 1){
     previousButton.addEventListener("click", previousMathProblem);
   }
 
   const nextButton = document.createElement("button");
   nextButton.classList.add("next-btn");
-  nextButton.innerHTML = "volgende";
+  nextButton.innerHTML = "Next";
   nextButton.addEventListener("click", nextMathProblem);
+
+
   if (currentIndex  === amountMathProblems - 1 ) {
     nextButton.removeEventListener("click", nextMathProblem);
   } 
+
+  if (currentIndex === amountMathProblems - 1 && currentIndex === user.selectedAnswers.length){
+    nextButton.addEventListener("click", getResult)
+  }
   quizRender.append(buttonContainer);
   buttonContainer.appendChild(previousButton);
   buttonContainer.appendChild(nextButton);
 };
-
+//if question.remove ===
 // mathProblems.forEach((mathProblem) => quiz(mathProblem));
 // mathProblems.forEach((mathProblem) => console.log(mathProblems.indexOf(mathProblem)));
 // setInterval(quiz(quizQuestion),1000);
@@ -118,6 +127,7 @@ function nextMathProblem() {
     removeQuiz(currentQuiz);
   }
   console.log("next");
+
 }
 
 function previousMathProblem() {
@@ -159,8 +169,6 @@ function removeQuiz(currentQuiz) {
 
 
 
-
-
 function showSavedAnswers() {
   const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
 
@@ -171,28 +179,32 @@ function showSavedAnswers() {
 const savedData = user.savedAnswersData
 const answerData = [];
 
-
+const [answer, answersIndex] = user.savedAnswersData;
+// console.log(answer);
+// console.log(answersIndex);
 
 savedData.forEach((data) => {
- answerData.push(data);
-console.log(answerData);
-
-})
+   answerData.push(data);
+  // console.log(answerData);
+  
+  })
   allQuestions.forEach((question, index) => {
     // console.log(`${question.value}, ${index}`);
 // console.log(question.innerHTML);
 // console.log(savedData);
+// console.log(answer[answersIndex]);
 
-    if (savedData[index] === question.value){
-      console.log('yes');
-      // console.log(savedData[index]);
+
+    if (savedData[answersIndex] === question.value){
+      // console.log('yes');
+      // console.log(savedData[answersIndex]);
       question.classList.add("correct-answer")
       allQuestions.forEach((question) =>
       question.removeEventListener("click", selectQuestion)
     );
     }
-    else if (savedData[index] == question.innerHTML) {
-      console.log('no');
+    else if (savedData[answersIndex] == question.innerHTML) {
+      // console.log('no');
       // console.log(savedData[index]);
       question.classList.add("incorrect-answer")
       allQuestions.forEach((question) =>
@@ -204,6 +216,8 @@ console.log(answerData);
   })
 
 }
+
+
 
 // //
 
@@ -235,3 +249,48 @@ console.log(answerData);
 // }
 
 //
+
+
+///saveAnswer value
+
+
+
+function getResult(){
+  let quizRender = document.querySelector(".quiz-render")
+  const correctAnswers = user.correctAnswers;
+  console.log('correctAnswers')
+ quizRender.remove();
+ const resultWindow = document.createElement("div");
+ resultWindow.classList.add("result-window");
+ resultWindow.innerHTML = `Congratulations! <br> you got ${correctAnswers} of the ${amountMathProblems} correct`;
+
+ const restartButton = document.createElement("button");
+ restartButton.classList.add("restart-btn");
+ restartButton.innerHTML = "restart";
+ restartButton.addEventListener("click", restartQuiz)
+
+ resultWindow.appendChild(restartButton);
+ game.append(resultWindow);
+
+
+}
+
+function restartQuiz(){
+  const resultWindow = document.querySelector(".result-window");
+  resultWindow.remove()
+  user = {
+
+    correctAnswers: 0,
+    incorrectAnswers: 0,
+    selectedAnswers: [],
+    userCurrentQuestion:0,
+    savedAnswers:[],
+    savedAnswersData:[],
+    savedAnswersIndex:[],
+
+  
+  };
+  quiz(quizQuestion)
+  }
+
+  

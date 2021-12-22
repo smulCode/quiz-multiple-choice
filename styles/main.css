@@ -42,6 +42,13 @@ button:hover {
   cursor: pointer;
 }
 
+.restart-btn {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+}
+
 .container-quiz {
   display: grid;
   margin: 1em 5vw;
@@ -128,4 +135,16 @@ li:nth-child(odd) {
 
 .incorrect-answer {
   background-color: crimson;
+}
+
+.result-window {
+  display: grid;
+  place-content: center;
+  grid-template-columns: 1fr;
+  color: black;
+  height: 100%;
+  width: 100%;
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 1em 10vw;
 }/*# sourceMappingURL=main.css.map */

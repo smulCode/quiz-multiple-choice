@@ -10,6 +10,7 @@ export function currentMathProblemIndex() {
 
     const allQuestions = Array.from(document.querySelectorAll(".question-bar"));
     const questionSelection = this;
+
   
     if (questionSelection.dataset.answer === "correct") {
       questionSelection.classList.add("correct-answer");
@@ -30,6 +31,7 @@ export function currentMathProblemIndex() {
     allQuestions.forEach((question) =>
       question.removeEventListener("click", selectQuestion)
     );
+    
   }
   
   export function showCorrectAnswer() {
@@ -50,7 +52,7 @@ export function currentMathProblemIndex() {
         user.selectedAnswers.push(question.value)
         user.savedAnswers.push(question.value)
         user.savedAnswersData.push(question.value,index)
-        user.savedAnswersIndex.push(allQuestions[index]);
+        user.savedAnswersIndex.push(index);
 
  
         user["correctAnswers"] = user["correctAnswers"] + 1 || 1;
@@ -61,7 +63,7 @@ export function currentMathProblemIndex() {
         user.selectedAnswers.push(question.value);
         user.savedAnswers.push(question.value);
         user.savedAnswersData.push(question.value,index);
-        user.savedAnswersIndex.push(allQuestions[index]);
+        user.savedAnswersIndex.push(index);
         user["incorrectAnswers"] = user["incorrectAnswers"] + 1 || 1;
        
         console.log(user);
@@ -72,3 +74,4 @@ export function currentMathProblemIndex() {
   }
   
  
+

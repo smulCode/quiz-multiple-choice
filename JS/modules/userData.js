@@ -11,3 +11,10 @@ export let user = {
 
   
   };
+
+  
+/*
+function estartQuiz(){
+quiz(quizQuestion)
+}
+*/
