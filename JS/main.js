@@ -3,7 +3,7 @@ const game = document.getElementById("game");
 const ButtonQuiz = () => {
   const title = document.createElement("h1");
   title.classList.add("h1-quiz");
-  title.innerText = "Math Quiz"
+  title.innerText = "Math Quiz";
   const startBtn = document.createElement("button");
   startBtn.classList.add("start-btn");
   startBtn.innerText = "Start";
@@ -13,7 +13,7 @@ const ButtonQuiz = () => {
     (async () => {
       try {
         let app = await import("./modules/quiz.js");
-  
+
         startBtn.classList.add("display-none");
         title.classList.add("display-none");
       } catch (error) {
@@ -23,8 +23,3 @@ const ButtonQuiz = () => {
   });
 };
 ButtonQuiz();
-
-
-
-
-
