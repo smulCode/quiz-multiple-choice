@@ -147,4 +147,13 @@ li:nth-child(odd) {
   font-size: 2.5rem;
   font-weight: bold;
   padding: 1em 10vw;
+}
+
+.h1-quiz {
+  font-size: 5.5rem;
+  font-weight: bolder;
+  margin-top: 2em;
+  -webkit-text-stroke: 1px black;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }/*# sourceMappingURL=main.css.map */
